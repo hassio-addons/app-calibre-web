@@ -1,0 +1,67 @@
+#!/command/with-contenv bashio
+# shellcheck shell=bash
+# ==============================================================================
+# Home Assistant Community App: Calibre-Web
+# Prepares the data directory, the library and the settings this app owns
+# ==============================================================================
+readonly CONFIG_DIR="/data/calibre-web"
+readonly DATABASE="${CONFIG_DIR}/app.db"
+readonly LIBRARY="/media/books"
+
+declare log_level
+
+# The settings database, the session key and the thumbnails Calibre-Web
+# generates. The books themselves are not in here; those live in the library.
+mkdir -p "${CONFIG_DIR}" /data/cache
+
+if ! bashio::fs.file_exists "${DATABASE}"; then
+    bashio::log.info "First run! Setting up..."
+
+    # Calibre-Web reads a Calibre library, it does not create one, and it will
+    # not start without being pointed at one. calibredb writes an empty library
+    # wherever it is aimed, which is what turns the first start into a working
+    # app rather than a wizard asking for a folder that does not exist yet.
+    #
+    # Somebody who already has a library keeps it: this only runs when there is
+    # nothing here, and where Calibre-Web looks is settled from its own
+    # configuration page afterwards.
+    if ! bashio::fs.file_exists "${LIBRARY}/metadata.db"; then
+        bashio::log.info "Creating an empty Calibre library in ${LIBRARY}..."
+        mkdir -p "${LIBRARY}"
+        calibredb --with-library "${LIBRARY}" list > /dev/null
+    fi
+
+    # A dry run of the updater is the shortest way to have Calibre-Web build its
+    # settings database and its administrator account and then stop. Nothing is
+    # updated by it, and it is the only thing that happens: the settings below
+    # are written into that database before it is ever served.
+    cps -d > /dev/null
+
+    # Where the books are, and permission to add more of them from the web
+    # interface. Uploading is off in a stock Calibre-Web, which on a library
+    # this app just created leaves no way to put a book in it at all.
+    #
+    # Where calibre, kepubify and unrar are is not written here: Calibre-Web
+    # looks for all three itself while it builds the database above, and this
+    # image puts them where it looks.
+    sqlite3 "${DATABASE}" \
+        "UPDATE settings SET
+            config_calibre_dir = '${LIBRARY}',
+            config_uploading = 1;"
+fi
+
+# Applied on every start, so the app log stays the log. Calibre-Web writes to a
+# file of its own by default, inside a folder that is part of every backup.
+log_level=20
+case "$(bashio::string.lower "$(bashio::config 'log_level' 'info')")" in
+    trace|debug)        log_level=10 ;;
+    info|notice)        log_level=20 ;;
+    warning)            log_level=30 ;;
+    error)              log_level=40 ;;
+    fatal)              log_level=50 ;;
+esac
+
+sqlite3 "${DATABASE}" \
+    "UPDATE settings SET
+        config_logfile = '/dev/stdout',
+        config_log_level = ${log_level};"

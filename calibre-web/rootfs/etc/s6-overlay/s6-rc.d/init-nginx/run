@@ -1,0 +1,28 @@
+#!/command/with-contenv bashio
+# shellcheck shell=bash
+# ==============================================================================
+# Home Assistant Community App: Calibre-Web
+# Configures NGINX for use with Calibre-Web
+# ==============================================================================
+
+# Generate Ingress configuration
+bashio::var.json \
+    interface "$(bashio::app.ip_address)" \
+    port "^$(bashio::app.ingress_port)" \
+    | tempio \
+        -template /etc/nginx/templates/ingress.gtpl \
+        -out /etc/nginx/servers/ingress.conf
+
+# The direct server is always generated, even when the port is not published to
+# the host. It costs nothing to have listening on the internal network, and it
+# is what an OPDS reader, a Kobo or a reverse proxy of your own talks to.
+bashio::config.require.ssl
+
+bashio::var.json \
+    certfile "$(bashio::config 'certfile')" \
+    keyfile "$(bashio::config 'keyfile')" \
+    port "^8083" \
+    ssl "^$(bashio::config 'ssl')" \
+    | tempio \
+        -template /etc/nginx/templates/direct.gtpl \
+        -out /etc/nginx/servers/direct.conf

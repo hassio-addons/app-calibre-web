@@ -1,0 +1,17 @@
+#!/command/with-contenv bashio
+# shellcheck shell=bash
+# ==============================================================================
+# Home Assistant Community App: Calibre-Web
+# Runs the NGINX daemon
+# ==============================================================================
+
+# Wait for Calibre-Web to become available. It listens on a socket rather than
+# on a port, so there is no address to wait on. The first start after an update
+# is the slow one, since the databases are migrated before it starts listening.
+for _ in {1..900}; do
+    bashio::fs.socket_exists '/run/calibre-web.sock' && break
+    sleep 1
+done
+
+bashio::log.info "Starting NGINX..."
+exec nginx

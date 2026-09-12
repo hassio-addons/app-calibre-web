@@ -1,0 +1,13 @@
+#!/command/with-contenv bashio
+# shellcheck shell=bash
+# ==============================================================================
+# Home Assistant Community App: Calibre-Web
+# Runs the Calibre-Web server
+# ==============================================================================
+
+bashio::log.info "Starting Calibre-Web..."
+
+# Everything else it needs is in the environment set by the image: where its
+# databases and cache live, and the socket it listens on. NGINX is what faces
+# Ingress and the network, so Calibre-Web is never given a port of its own.
+exec cps
