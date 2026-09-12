@@ -139,15 +139,15 @@ RUN \
     && apt-get install -y --no-install-recommends \
         ghostscript=10.05.1~dfsg-1+deb13u1 \
         libmagic1t64=1:5.46-5 \
-        libmagickwand-7.q16-10=8:7.1.1.43+dfsg1-1+deb13u11 \
-        nginx=1.26.3-3+deb13u7 \
+        libmagickwand-7.q16-10=8:7.1.1.43+dfsg1-1+deb13u12 \
+        nginx=1.26.3-3+deb13u8 \
         python3=3.13.5-1 \
-        sqlite3=3.46.1-7+deb13u1 \
+        sqlite3=3.46.1-7+deb13u2 \
         unrar-free=1:0.3.1-1 \
     \
     && apt-get install -y --no-install-recommends \
         fonts-liberation=1:2.1.5-3 \
-        libasound2t64=1.2.14-1 \
+        libasound2t64=1.2.14-1+deb13u1 \
         libegl1=1.7.0-1+b2 \
         libfontconfig1=2.15.0-2.3 \
         libfreetype6=2.13.3+dfsg-1+deb13u1 \
