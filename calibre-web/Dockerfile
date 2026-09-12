@@ -147,7 +147,7 @@ RUN \
     \
     && apt-get install -y --no-install-recommends \
         fonts-liberation=1:2.1.5-3 \
-        libasound2t64=1.2.14-1 \
+        libasound2t64=1.2.14-1+deb13u1 \
         libegl1=1.7.0-1+b2 \
         libfontconfig1=2.15.0-2.3 \
         libfreetype6=2.13.3+dfsg-1+deb13u1 \
