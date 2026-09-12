@@ -139,7 +139,7 @@ RUN \
     && apt-get install -y --no-install-recommends \
         ghostscript=10.05.1~dfsg-1+deb13u1 \
         libmagic1t64=1:5.46-5 \
-        libmagickwand-7.q16-10=8:7.1.1.43+dfsg1-1+deb13u11 \
+        libmagickwand-7.q16-10=8:7.1.1.43+dfsg1-1+deb13u12 \
         nginx=1.26.3-3+deb13u7 \
         python3=3.13.5-1 \
         sqlite3=3.46.1-7+deb13u1 \
