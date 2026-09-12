@@ -40,7 +40,9 @@
     {
       "customType": "regex",
       "managerFilePatterns": ["//Dockerfile$/"],
-      "matchStrings": ["ARG CALIBRE_VERSION=[\"']?(?<currentValue>.+?)[\"']?\\s+"],
+      "matchStrings": [
+        "ARG CALIBRE_VERSION=[\"']?(?<currentValue>.+?)[\"']?\\s+"
+      ],
       "datasourceTemplate": "github-releases",
       "depNameTemplate": "kovidgoyal/calibre",
       "extractVersionTemplate": "^v(?<version>.*)$"
