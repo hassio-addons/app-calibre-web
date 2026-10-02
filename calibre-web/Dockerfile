@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.io/hassio-addons/debian-base:9.4.0
+ARG BUILD_FROM=ghcr.io/hassio-addons/debian-base:9.5.0
 
 # Calibre-Web reads a library, it does not convert one. Everything this app can
 # do with a book that is not simply handing it over, the "Convert" button, the
