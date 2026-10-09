@@ -17,7 +17,7 @@ FROM ${BUILD_FROM} AS calibre
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 ARG BUILD_ARCH=amd64
-ARG CALIBRE_VERSION="9.14.0"
+ARG CALIBRE_VERSION="9.16.0"
 RUN \
     apt-get update \
     \
