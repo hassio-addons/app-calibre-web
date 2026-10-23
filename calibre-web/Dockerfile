@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.io/hassio-addons/debian-base:9.4.0
+ARG BUILD_FROM=ghcr.io/hassio-addons/debian-base:9.5.0
 
 # Calibre-Web reads a library, it does not convert one. Everything this app can
 # do with a book that is not simply handing it over, the "Convert" button, the
@@ -22,7 +22,7 @@ RUN \
     apt-get update \
     \
     && apt-get install -y --no-install-recommends \
-        xz-utils=5.8.1-1+deb13u1 \
+        xz-utils=5.8.1-1+deb13u2 \
     \
     && if [[ "${BUILD_ARCH}" = "aarch64" ]]; then ARCH="arm64"; fi \
     && if [[ "${BUILD_ARCH}" = "amd64" ]]; then ARCH="x86_64"; fi \
@@ -137,10 +137,10 @@ RUN \
     apt-get update \
     \
     && apt-get install -y --no-install-recommends \
-        ghostscript=10.05.1~dfsg-1+deb13u1 \
+        ghostscript=10.05.1~dfsg-1+deb13u3 \
         libmagic1t64=1:5.46-5 \
         libmagickwand-7.q16-10=8:7.1.1.43+dfsg1-1+deb13u12 \
-        nginx=1.26.3-3+deb13u8 \
+        nginx=1.26.3-3+deb13u10 \
         python3=3.13.5-1 \
         sqlite3=3.46.1-7+deb13u2 \
         unrar-free=1:0.3.1-1 \
