@@ -182,7 +182,7 @@ RUN \
 # alternative is a path that the app blanks out the next time somebody saves the
 # configuration page.
 ARG BUILD_ARCH=amd64
-ARG KEPUBIFY_VERSION="4.0.4"
+ARG KEPUBIFY_VERSION="5.0.0"
 RUN \
     if [[ "${BUILD_ARCH}" = "aarch64" ]]; then ARCH="arm64"; fi \
     && if [[ "${BUILD_ARCH}" = "amd64" ]]; then ARCH="64bit"; fi \
