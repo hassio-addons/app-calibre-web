@@ -150,7 +150,7 @@ RUN \
         libasound2t64=1.2.14-1+deb13u1 \
         libegl1=1.7.0-1+b2 \
         libfontconfig1=2.15.0-2.3 \
-        libfreetype6=2.13.3+dfsg-1+deb13u1 \
+        libfreetype6=2.13.3+dfsg-1+deb13u2 \
         libgl1=1.7.0-1+b2 \
         libglx-mesa0=25.0.7-2+deb13u1 \
         libnss3=2:3.110-1+deb13u5 \
