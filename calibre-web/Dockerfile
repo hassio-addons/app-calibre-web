@@ -153,7 +153,7 @@ RUN \
         libfreetype6=2.13.3+dfsg-1+deb13u1 \
         libgl1=1.7.0-1+b2 \
         libglx-mesa0=25.0.7-2+deb13u1 \
-        libnss3=2:3.110-1+deb13u4 \
+        libnss3=2:3.110-1+deb13u5 \
         libopengl0=1.7.0-1+b2 \
         libxcomposite1=1:0.4.6-1 \
         libxdamage1=1:1.1.6-1+b2 \
